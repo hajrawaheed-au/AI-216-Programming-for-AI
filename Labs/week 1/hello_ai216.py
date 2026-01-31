@@ -1,3 +1,8 @@
+"""
+hello_ai216.py
+Lab01 script: Prints name, ID, Python version, and a short message about Programming for AI.
+"""
+
 import sys
 
 # Print name and ID
@@ -5,7 +10,7 @@ print("Name: Uzair Abdullah")
 print("ID: AI-216")
 
 # Print Python version
-print("Python Version:")
+print("\nPython Version:")
 print(sys.version)
 
 # Short message about Programming for AI
