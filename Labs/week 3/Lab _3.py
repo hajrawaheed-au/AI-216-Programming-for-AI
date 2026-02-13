@@ -82,5 +82,29 @@ clf = Classifier(threshold)
 
 print(clf.classify_list(values))
 
-#Task 4
+#Task 5
+
+def clean_data(data):
+    return [x for x in data if 0 <= x <= 100]
+
+
+class DataAnalyzer:
+    def __init__(self, data):
+        self.data = data
+    
+    def count(self):
+        return len(self.data)
+    
+    def average(self):
+        return sum(self.data) / len(self.data)
+
+raw_data = [10, 55, -3, 78, 120, 66, 92]
+
+cleaned = clean_data(raw_data)
+analyzer = DataAnalyzer(cleaned)
+
+print("Cleaned:", cleaned)
+print("Count:", analyzer.count())
+print("Average:", analyzer.average())
+
 
