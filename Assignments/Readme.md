@@ -1,92 +1,71 @@
-# Assignment 01 – Programming for AI
+# AI-216 – Programming for Artificial Intelligence  
+## Assignment 01: Python Logic & Problem Solving  
 
-This assignment focuses on using basic Python concepts like variables, conditionals, and loops to solve real-world problems. The goal was to build logical thinking and write clear, simple Python code without external libraries.
+**Student Name:** Your Name  
+**Roll Number:** Your Roll Number  
+**Semester:** Spring 2026  
+
+---
+
+## Overview
+
+This assignment focuses on applying basic Python concepts to solve logical problems.  
+The tasks were completed using variables, conditional statements, loops, and logical operators without using external libraries.
 
 ---
 
 ## Problem 1: Monthly Budget Analyzer
 
-**Explanation**  
-This program tracks monthly expenses (rent, food, transport, utilities) and checks if the student stays within the budget.
+The program calculates total monthly expenses (rent, food, transport, utilities) and checks whether the total is within the budget limit of 60,000 PKR.
 
-**Logic Used**  
-- Store expenses in variables  
-- Add them to calculate total expense  
-- Compare total with budget (60,000 PKR) using if–else  
-- Show "Within Budget" or "Over Budget"
-
-**Challenges Faced**  
-Making sure the total expense calculation was correct.
+**Concepts Used:**  
+Variables, arithmetic operations, `if-else` condition.
 
 ---
 
 ## Problem 2: Electricity Bill Estimator
 
-**Explanation**  
-This program finds the electricity billing category based on units used.
+The program takes electricity units as input and determines the billing category:
+- ≤ 100 → Basic Rate  
+- 101–300 → Standard Rate  
+- > 300 → High Usage Rate  
 
-**Logic Used**  
-- Take units as input  
-- Use if–elif–else for ranges  
-- Display the correct category
-
-**Challenges Faced**  
-Setting correct unit ranges without overlap.
+**Concepts Used:**  
+User input, `if-elif-else` conditions.
 
 ---
 
-## Problem 3: Class Attendance Analysis
+## Problem 3: Attendance Analysis
 
-**Explanation**  
-This program checks which students meet the 75% attendance rule.
+The program analyzes a list of attendance percentages and counts how many students meet the required attendance (≥ 75%) and how many do not.
 
-**Logic Used**  
-- Store attendance in a list  
-- Loop through the list  
-- Count students ≥75% and <75%
-
-**Challenges Faced**  
-Updating counters correctly inside the loop.
+**Concepts Used:**  
+Lists, loops, counters, conditional logic.
 
 ---
 
-## Problem 4: Scholarship Eligibility System
+## ✅ Problem 4: Scholarship Eligibility System
 
-**Explanation**  
-This program checks scholarship eligibility using CGPA and income.
+The program checks scholarship eligibility based on:
+- CGPA ≥ 3.5  
+- Family income ≤ 80,000 PKR  
 
-**Logic Used**  
-- Use two lists (CGPA and income)  
-- Loop through both lists  
-- Apply condition: CGPA ≥3.5 AND income ≤80,000  
-- Count eligible students
+A loop and compound condition (`and`) are used to count eligible students.
 
-**Challenges Faced**  
-Using compound conditions correctly.
+**Concepts Used:**  
+Compound conditions, loops, logical operators.
 
 ---
 
 ## Problem 5 (Bonus): Sensor Alert System
 
-**Explanation**  
-This program detects unsafe sensor readings.
+The program identifies sensor readings outside the safe range (20–80), counts total alerts, and calculates the percentage of alert readings.
 
-**Logic Used**  
-- Loop through readings list  
-- If reading <20 or >80 → alert  
-- Count alerts and find percentage
-
-**Challenges Faced**  
-Calculating percentage properly.
+**Concepts Used:**  
+Accumulators, logical operator (`or`), percentage calculation.
 
 ---
 
-## Overall Learning
+## Conclusion
 
-This assignment improved my understanding of:
-- Variables  
-- Conditional statements  
-- Loops and counters  
-- Converting real-world rules into code logic
-
-It helped me practice problem-solving using Python basics.
+This assignment strengthened my understanding of Python fundamentals and improved my problem-solving skills using structured programming logic.
