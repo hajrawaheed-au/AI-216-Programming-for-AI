@@ -1,10 +1,6 @@
 # AI-216 – Programming for Artificial Intelligence  
 ## Assignment 01: Python Logic & Problem Solving  
 
-**Student Name:** Your Name  
-**Roll Number:** Your Roll Number  
-**Semester:** Spring 2026  
-
 ---
 
 ## Overview
