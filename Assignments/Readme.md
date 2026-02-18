@@ -40,7 +40,7 @@ Lists, loops, counters, conditional logic.
 
 ---
 
-## ✅ Problem 4: Scholarship Eligibility System
+## Problem 4: Scholarship Eligibility System
 
 The program checks scholarship eligibility based on:
 - CGPA ≥ 3.5  
