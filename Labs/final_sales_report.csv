@@ -1,0 +1,5 @@
+OrderID,Customer,City,Category,Amount,HighValue,TaxedAmount
+106,Sara,karachi,Electronics,15000,True,17250.0
+101,Ali,karachi,Electronics,12000,True,13799.999999999998
+105,Zain,lahore,Clothing,5200,False,5979.999999999999
+103,Ahmed,karachi,Electronics,5200,False,5979.999999999999
