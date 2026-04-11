@@ -1,0 +1,7 @@
+id,name,age,city,experience,expected_salary,education
+1,Ali,22.0,isl,1.0,50000,BS
+2,Sara,,Lahore,3.0,70000,MS
+3,Ahmed,25.0,Karachi,,?,BS
+4,Fatima,28.0,Islamabad,5.0,90000,
+5,Usman,21.0,isl,0.0,40000,BS
+6,,30.0,Lahore,7.0,85000,PhD
