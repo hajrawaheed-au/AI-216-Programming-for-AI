@@ -17,7 +17,7 @@ while True:
     print("1. Add Expense")
     print("2. View Expenses")
     print("3. Total Spending & Stats")
-    print("4. Category Summary")
+    print("4. Category Summary" )
     print("5. Search Expense")
     print("6. Highest & Lowest Expense")
     print("7. Delete Expense")
@@ -26,7 +26,7 @@ while True:
     choice = input("Enter choice: ")
 
     # Add Expense
-    if choice == "1":
+    if choice == "1": 
 
         category = input("Category (Food/Transport/Shopping/Health/Other): ")
         amount = float(input("Amount: "))
@@ -61,20 +61,15 @@ while True:
             print("Highest Expense :", np.max(amounts))
             print("Lowest Expense  :", np.min(amounts))
             print("Total Entries   :", len(df))
-
     # Category Summary
-    elif choice == "4":
-
+    if choice=="4":
         if df.empty:
-            print("No Data!")
+            print("no data")
         else:
-            summary = df.groupby("Category")["Amount"].sum().sort_values(ascending=False)
-
-            print("\n--- Spending by Category ---")
-            for cat, total in summary.items():
-                bar = "█" * int(total // 100)
-                print(f"{cat:<15} PKR {total:<8.0f} {bar}")
-
+            summary=df.groupby("Category")["Amount"].sum()
+            for cat,total in summary.items():
+                print(f"{cat}  :  PKR {total}")
+                
     # Search Expense
     elif choice == "5":
 
