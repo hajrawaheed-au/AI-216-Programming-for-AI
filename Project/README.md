@@ -63,13 +63,6 @@ pip install pandas numpy
 
 ---
 
-## Step 3: Run the Program
-
-```bash
-python expense_tracker.py
-```
-
----
 
 # 📋 Menu Options
 
