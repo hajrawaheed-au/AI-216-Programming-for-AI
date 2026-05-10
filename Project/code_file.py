@@ -1,122 +1,123 @@
 import pandas as pd
 import numpy as np
+import os
 
-# OOP Class
-class Person:
-    def __init__(self, name, age, weight, height_cm, gender):
-        self.name   = name
-        self.age    = age
-        self.weight = weight
-        self.height = height_cm
-        self.gender = gender
+FILE = "expenses.csv"
 
-    def bmi(self):
-        return round(self.weight / ((self.height / 100) ** 2), 1)
+# Load File
+if os.path.exists(FILE):
+    df = pd.read_csv(FILE)
+else:
+    df = pd.DataFrame(columns=["Category", "Amount", "Description"])
 
-    def bmi_status(self):
-        b = self.bmi()
-        if b < 18.5: return "Underweight"
-        elif b < 25: return "Normal"
-        elif b < 30: return "Overweight"
-        else:        return "Obese"
+# Menu
+while True:
 
-    def goal(self):
-        b = self.bmi()
-        if b < 18.5: return "Gain Weight"
-        elif b < 25: return "Maintain Weight"
-        else:        return "Lose Weight"
+    print("\n===== EXPENSE TRACKER =====")
+    print("1. Add Expense")
+    print("2. View Expenses")
+    print("3. Total Spending & Stats")
+    print("4. Category Summary")
+    print("5. Search Expense")
+    print("6. Highest & Lowest Expense")
+    print("7. Delete Expense")
+    print("0. Exit")
 
-    def daily_calories(self):
-        if self.gender == '1':
-            bmr = 10 * self.weight + 6.25 * self.height - 5 * self.age + 5
+    choice = input("Enter choice: ")
+
+    # Add Expense
+    if choice == "1":
+
+        category = input("Category (Food/Transport/Shopping/Health/Other): ")
+        amount = float(input("Amount: "))
+        desc = input("Description: ")
+
+        new = pd.DataFrame([[category, amount, desc]],
+                           columns=["Category", "Amount", "Description"])
+
+        df = pd.concat([df, new], ignore_index=True)
+        df.to_csv(FILE, index=False)
+
+        print("Expense Added!")
+
+    # View Expenses
+    elif choice == "2":
+
+        if df.empty:
+            print("No Expenses Found!")
         else:
-            bmr = 10 * self.weight + 6.25 * self.height - 5 * self.age - 161
-        tdee = bmr * 1.55
-        if self.bmi() < 18.5: return int(tdee + 500)
-        elif self.bmi() < 25:  return int(tdee)
-        else:                  return int(tdee - 500)
+            print("\n", df)
 
-# Load & Clean Data
-df = pd.read_csv('nutrition.csv')
-df = df[['name', 'calories', 'protein', 'carbohydrate', 'fat']].dropna()
-for col in ['calories', 'protein', 'carbohydrate', 'fat']:
-    df[col] = df[col].astype(str).str.extract(r'([-+]?\d*\.?\d+)')[0].astype(float)
+    # Total Spending + Stats
+    elif choice == "3":
 
-keywords = ['chicken', 'egg', 'rice', 'bread', 'milk', 'banana', 'apple',
-            'beef', 'tuna', 'salmon', 'potato', 'oat', 'yogurt', 'cheese',
-            'spinach', 'broccoli', 'carrot', 'tomato', 'orange', 'pasta',
-            'lentil', 'onion', 'cucumber', 'almond', 'peanut', 'corn', 'fish']
-df = df[df['name'].str.lower().str.contains('|'.join(keywords))]
-df = df[df['calories'] > 5].drop_duplicates(subset='calories').reset_index(drop=True)
+        if df.empty:
+            print("No Data!")
+        else:
+            amounts = df["Amount"].values
 
-# Meal Plan
-def get_foods(keys, n=6):
-    return df[df['name'].str.lower().str.contains('|'.join(keys))].head(n).reset_index(drop=True)
+            print("\nTotal Spending  :", np.sum(amounts))
+            print("Average Spending:", round(np.mean(amounts), 2))
+            print("Highest Expense :", np.max(amounts))
+            print("Lowest Expense  :", np.min(amounts))
+            print("Total Entries   :", len(df))
 
-def show_meal_plan(cal):
-    proteins = get_foods(['chicken', 'tuna', 'salmon', 'egg', 'beef'])
-    carbs    = get_foods(['rice', 'bread', 'oat', 'pasta', 'potato'])
-    veggies  = get_foods(['spinach', 'broccoli', 'carrot', 'tomato', 'cucumber'])
-    fruits   = get_foods(['apple', 'banana', 'orange'])
+    # Category Summary
+    elif choice == "4":
 
-    meals = [
-        ("🌅 Breakfast", int(cal * 0.25), [proteins.iloc[0], carbs.iloc[0],   fruits.iloc[0]]),
-        ("☀️  Lunch",    int(cal * 0.35), [proteins.iloc[1], carbs.iloc[1],   veggies.iloc[0]]),
-        ("🌙 Dinner",    int(cal * 0.30), [proteins.iloc[2], veggies.iloc[1], veggies.iloc[2]]),
-        ("🍎 Snack",     int(cal * 0.10), [fruits.iloc[1],   veggies.iloc[3]]),
-    ]
+        if df.empty:
+            print("No Data!")
+        else:
+            summary = df.groupby("Category")["Amount"].sum().sort_values(ascending=False)
 
-    print(f"\n{'═'*58}\n  🍽️  YOUR PERSONALIZED MEAL PLAN\n{'═'*58}")
-    for meal, kcal, foods in meals:
-        print(f"\n  {meal}  (~{kcal} kcal)")
-        print(f"  {'─'*54}")
-        print(f"  {'Food':<40} {'Cal':>5}  {'Pro':>5}  {'Fat':>5}")
-        print(f"  {'─'*54}")
-        for f in foods:
-            print(f"  {f['name'][:39]:<40} {f['calories']:>5.0f}  {f['protein']:>4.1f}g  {f['fat']:>4.1f}g")
+            print("\n--- Spending by Category ---")
+            for cat, total in summary.items():
+                bar = "█" * int(total // 100)
+                print(f"{cat:<15} PKR {total:<8.0f} {bar}")
 
-# Main
-print("\n  ╔══════════════════════════════════════════╗")
-print("  ║      🥗  PERSONAL DIET PLANNER  🥗       ║")
-print("  ╚══════════════════════════════════════════╝")
-print("\n  Enter your details:\n")
+    # Search Expense
+    elif choice == "5":
 
-name   = input("  Name             : ")
-age    = int(input("  Age              : "))
-weight = float(input("  Weight (kg)      : "))
+        keyword = input("Enter keyword to search: ").lower()
+        result = df[df["Description"].str.lower().str.contains(keyword) |
+                    df["Category"].str.lower().str.contains(keyword)]
 
-print("  Height")
-feet   = int(input("    Feet           : "))
-inches = int(input("    Inches         : "))
-height_cm = round((feet * 30.48) + (inches * 2.54), 1)
-print(f"    Converted      : {height_cm} cm")
+        if result.empty:
+            print("No match found!")
+        else:
+            print("\n", result)
 
-print("  Gender      1. Male   2. Female")
-gender = input("  Choice           : ")
+    # Highest & Lowest Expense
+    elif choice == "6":
 
-p   = Person(name, age, weight, height_cm, gender)
-cal = p.daily_calories()
+        if df.empty:
+            print("No Data!")
+        else:
+            print("\nHighest Expense:")
+            print(df.loc[df["Amount"].idxmax()])
 
-print(f"\n{'═'*58}")
-print(f"  👤 {p.name}  |  Age: {p.age}")
-print(f"{'═'*58}")
-print(f"  BMI                : {p.bmi()}  →  {p.bmi_status()}")
-print(f"  Recommended Goal   : {p.goal()}")
-print(f"  Daily Calories     : {cal} kcal")
-print(f"  Protein Target     : {int(cal * 0.3 / 4)}g")
-print(f"  Carbs Target       : {int(cal * 0.4 / 4)}g")
-print(f"  Fat Target         : {int(cal * 0.3 / 9)}g")
+            print("\nLowest Expense:")
+            print(df.loc[df["Amount"].idxmin()])
 
-print(f"\n{'─'*58}")
-print(f"  📊 DATASET STATS (NumPy)")
-print(f"{'─'*58}")
-print(f"  Avg Calories : {np.mean(df['calories'].values):.1f} kcal")
-print(f"  Avg Protein  : {np.mean(df['protein'].values):.1f}g")
-print(f"  Avg Carbs    : {np.mean(df['carbohydrate'].values):.1f}g")
-print(f"  Avg Fat      : {np.mean(df['fat'].values):.1f}g")
+    # Delete Expense
+    elif choice == "7":
 
-show_meal_plan(cal)
+        if df.empty:
+            print("No Data!")
+        else:
+            print(df)
+            try:
+                row = int(input("Enter row number to delete: "))
+                df = df.drop(row).reset_index(drop=True)
+                df.to_csv(FILE, index=False)
+                print("Deleted Successfully!")
+            except:
+                print("Invalid Input!")
 
-print(f"\n{'═'*58}")
-print(f"  Stay consistent and eat healthy! 💪🥗")
-print(f"{'═'*58}\n")
+    # Exit
+    elif choice == "0":
+        print("Good Bye!")
+        break
+
+    else:
+        print("Wrong Choice!")
