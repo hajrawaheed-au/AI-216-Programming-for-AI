@@ -2,7 +2,7 @@
 
 A simple and user-friendly Expense Tracker project developed using Python, Pandas, and NumPy.
 
-This application helps users manage and analyze their daily expenses. All expense records are permanently stored in a CSV file.
+This System helps users manage and analyze their daily expenses. All expense records are permanently stored in a CSV file.
 
 ---
 
@@ -153,14 +153,12 @@ This project demonstrates:
 - Conditional Statements
 - Exception Handling
 - Searching & Filtering
-- GroupBy Operations
 
 ---
 
 # 👨‍💻 Author
 
-Developed as a Python Mini Project for learning expense management and data analysis.
-
+Hajra Waheed
 ---
 
 # 🚀 Future Improvements
